@@ -77,7 +77,7 @@
 // });
 
 // app.listen(3000, () => console.log("✅ Clinic WhatsApp AutoReply Bot running"));
-
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
@@ -86,14 +86,13 @@ const app = express();
 app.use(bodyParser.json());
 
 // Replace with your actual values
-const ACCESS_TOKEN =
-  "EAAStLMwI91kBPnh2MZB3WpYNdNfV8VTZCpNQ7RTZAYTF1I7STlG9mH2ZBSSyrBZC6JSsjsuQOmZCYT5geSZAHZAFThZAj4AZCCZAEVRBXamnGqzVVZAerFNveYVqYxhjvUILhvenE8CJjPFl4W41Yy3I6O9EYhBaFTPkU3uEqXSZBBC2zVZCMQO5DrYls0kIGqFO6p1jEujwZDZD";
-
-const PHONE_NUMBER_ID = "808372809029790";
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
+const PORT = process.env.PORT || 3000;
 
 // ✅ Webhook verification
 app.get("/webhook", (req, res) => {
-  const VERIFY_TOKEN = "clinicbotverify";
+  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
   const mode = req.query["hub.mode"];
   const token = req.query["hub.verify_token"];
   const challenge = req.query["hub.challenge"];
@@ -160,6 +159,6 @@ Please type an option below:
   }
 });
 
-app.listen(3000, () =>
-  console.log("✅ Clinic WhatsApp AutoReply Bot running on port 3000"),
+app.listen(PORT, () =>
+  console.log(`✅ Clinic WhatsApp AutoReply Bot running on port ${PORT}`),
 );
