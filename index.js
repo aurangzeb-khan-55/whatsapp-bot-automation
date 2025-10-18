@@ -78,6 +78,7 @@
 
 // app.listen(3000, () => console.log("✅ Clinic WhatsApp AutoReply Bot running"));
 require('dotenv').config();
+const replies = require("./replies.json");
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
@@ -112,17 +113,6 @@ app.post("/webhook", async (req, res) => {
 
     const from = message.from;
     const text = message.text.body.trim();
-
-    // Define replies for options 1–7
-    const replies = {
-      1: "🏥 *Clinic Information*\nHill Country Internal Medicine & Weight Loss Center is dedicated to helping patients manage weight, diabetes, and overall health.",
-      2: "👨‍⚕️ *Meet Our Doctors*\nDr. John Doe & Dr. Sarah Smith specialize in internal medicine and weight management.",
-      3: "📅 *Book Appointment*\nYou can book your appointment online here: https://hillcountryclinic.com/appointment",
-      4: "💳 *Supported Insurance*\nWe accept Blue Cross, United Healthcare, Medicare, and many others.",
-      5: "📍 *Location*\nWe are located at 1234 Hill Country Dr, New Braunfels, TX.",
-      6: "📲 *Social Media Updates*\nFollow us on Facebook & Instagram for health tips and updates.",
-      7: "📞 *Contact Us*\nYou can call us at +1 (555) 123-4567 or reply here for support.",
-    };
 
     // Main menu message
     const mainMenu = `Hello! Welcome to Hill Country Internal Medicine & Weight Loss — New Braunfels, TX.
